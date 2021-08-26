@@ -10,7 +10,6 @@ import com.twitter.hbc.httpclient.BasicClient;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 import org.apache.kafka.clients.producer.*;
-import org.apache.kafka.common.protocol.types.Field;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,13 +23,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class TwitterConsumer {
-
+public class TwitterProducer {
 
 
     public static void run(String consumerKey, String consumerSecret, String token, String secret) throws IOException {
 
-        Logger logger = LoggerFactory.getLogger(TwitterConsumer.class);
+        Logger logger = LoggerFactory.getLogger(TwitterProducer.class);
 
         BlockingQueue<String> msgQueue = new LinkedBlockingQueue<String>(1000);
         BlockingQueue<String> eventQueue = new LinkedBlockingQueue<String>(100);
@@ -123,7 +121,7 @@ public class TwitterConsumer {
         Map<String, String> values = properties.getValues();
         String arg1 = values.get("tw_consumerKey").toString();
         System.out.println("arg1: " + arg1);
-        TwitterConsumer.run(values.get("tw_consumerKey").toString(), values.get("tw_consumerSecret").toString(),
+        TwitterProducer.run(values.get("tw_consumerKey").toString(), values.get("tw_consumerSecret").toString(),
                 values.get("tw_token").toString(), values.get("tw_secret").toString());
     }
 }
